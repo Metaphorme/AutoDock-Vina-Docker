@@ -2,6 +2,10 @@ name: Build
 
 on:
   push:
+    paths-ignore: 
+      - '**.md'
+      - 'LICENSE'
+
   workflow_dispatch:
 
 jobs:
@@ -28,5 +32,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64,linux/arm64
-          tags: metaphorme/autodock-vina:latest
+          tags: ghcr.io/metaphorme/autodock-vina:latest
           push: true
