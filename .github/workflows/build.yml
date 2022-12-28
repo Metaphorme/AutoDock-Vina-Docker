@@ -28,5 +28,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64,linux/arm64
-          tags: metaphorme/autoDock-Vina:latest
+          tags: metaphorme/autodock-vina:latest
           push: true
