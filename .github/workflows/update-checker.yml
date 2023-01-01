@@ -3,7 +3,6 @@
 
 name: Update Checker
 
-
 on:
   workflow_dispatch:
   schedule:
@@ -12,9 +11,11 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        BRANCHES: [develop, release]
 
     steps:
-
     - name: Get Commit Hash
       id: getHash
       run: |
@@ -25,13 +26,13 @@ jobs:
       id: cacheHash
       uses: actions/cache@v3
       with:
-        path: .commitHash
-        key: HEAD-${{ steps.getHash.outputs.commitHash }}
+        path: .commitHash-${{ matrix.BRANCHES }}
+        key: ${{ matrix.BRANCHES }}-${{ steps.getHash.outputs.commitHash }}
 
     - name: Save New Commit Hash
       if: steps.cacheHash.outputs.cache-hit != 'true'
       run: |
-        echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash
+        echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash-${{ matrix.BRANCHES }}
 
     - name: Trigger build
       if: steps.cacheHash.outputs.cache-hit != 'true'
@@ -39,6 +40,7 @@ jobs:
       with:
         token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
         event-type: Source Code Update
+        client-payload: '{"BEANCHES": "${{ matrix.BRANCHES }}"}'
 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main

@@ -5,13 +5,19 @@ on:
     paths-ignore: 
       - '**.md'
       - 'LICENSE'
+      - '.github/*'
 
   workflow_dispatch:
+
   repository_dispatch:
 
 jobs:
   Build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        BRANCHES: [develop, release]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,7 +37,10 @@ jobs:
       
       - name: Build and release Docker images
         uses: docker/build-push-action@v3
+        if: ${{ github.event.client_payload.BEANCHES }} == ${{ matrix.BRANCHES }} || github.event.action == ''
         with:
           platforms: linux/amd64,linux/arm64
-          tags: ghcr.io/metaphorme/autodock-vina:latest
+          build-args: |
+            BRANCHES=${{ matrix.BRANCHES }}
+          tags: ghcr.io/metaphorme/autodock-vina:${{ matrix.BRANCHES }}
           push: true

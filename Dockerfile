@@ -6,18 +6,22 @@
 
 FROM ubuntu:latest as builder
 
+ARG BRANCHES
+
 RUN /bin/bash -c " \
     set -ex \
     && apt-get update; apt-get install -y swig curl build-essential git libboost-all-dev \
-    && git clone https://github.com/ccsb-scripps/AutoDock-Vina /app/AutoDock-Vina \
+    && git clone -b $BRANCHES https://github.com/ccsb-scripps/AutoDock-Vina /app/AutoDock-Vina \
     && cd /app/AutoDock-Vina/build/linux/release; make \
     "
 
 
 FROM continuumio/miniconda3:latest
 
-LABEL org.opencontainers.image.authors="Metaphorme"
-LABEL org.opencontainers.image.description="https://github.com/Metaphorme/AutoDock-Vina-Docker"
+LABEL org.opencontainers.image.authors="Metaphorme" \
+      org.opencontainers.image.document="https://github.com/Metaphorme/AutoDock-Vina-Docker" \
+      org.opencontainers.image.description="Build from ${BRANCHES}" \
+      org.opencontainers.image.licenses="MIT"
 
 COPY --from=builder /app/AutoDock-Vina /opt/AutoDock-Vina
 

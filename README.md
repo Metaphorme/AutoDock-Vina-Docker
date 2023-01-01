@@ -11,7 +11,11 @@ Package [**AutoDock Vina**](https://github.com/ccsb-scripps/AutoDock-Vina), [ADF
 ### From Github
 
 ```bash
-docker pull ghcr.io/metaphorme/autodock-vina:latest
+# Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/release
+docker pull ghcr.io/metaphorme/autodock-vina:release
+
+# Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/develop
+docker pull ghcr.io/metaphorme/autodock-vina:develop
 ```
 
 We provide `linux/amd64`, `linux/arm64` images.
@@ -21,7 +25,7 @@ We provide `linux/amd64`, `linux/arm64` images.
 ```bash
 git clone https://github.com/Metaphorme/AutoDock-Vina-Docker.git
 cd AutoDock-Vina-Docker
-docker build -it autodock-vina .
+docker build --build-arg BRANCHES=[release or develop] -t autodock-vina .
 ```
 
 ## Run Docker Image
@@ -29,7 +33,7 @@ docker build -it autodock-vina .
 * Enter the shell and mount $PWD to /data
 
   ```bash
-  docker run -it -v $PWD:/data ghcr.io/metaphorme/autodock-vina
+  docker run -it -v $PWD:/data ghcr.io/metaphorme/autodock-vina:release
   ```
 
 	**Notice:** `$PWD` means the current working directory.
