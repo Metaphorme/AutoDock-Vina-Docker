@@ -2,7 +2,7 @@
 
 ![Build](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build.yml/badge.svg)
 
-Package [**AutoDock Vina**](https://github.com/ccsb-scripps/AutoDock-Vina), [ADFR software suite ](https://ccsb.scripps.edu/adfr/), [Meeko](https://github.com/forlilab/Meeko) into one Dockerfile.
+Package [**AutoDock Vina**](https://github.com/ccsb-scripps/AutoDock-Vina), [ADFR suite](https://ccsb.scripps.edu/adfr/), [Meeko](https://github.com/forlilab/Meeko) into one Dockerfile.
 
 **Notice:** Please makesure you will obey the License of [AutoDock Vina](https://autodock-vina.readthedocs.io/en/latest/citations.html), [ADFR software suite Non-Commercial Use](https://ccsb.scripps.edu/adfr/license/), [Meeko](https://github.com/forlilab/Meeko/blob/develop/LICENSE) before downloading this Docker image.
 
@@ -64,13 +64,23 @@ docker build -it autodock-vina .
 
 Contributions welcome! Please open an issue to discuess at first, fork this repository and submit a pull request.
 
+## Credits
+
+* [AutoDock Vina](https://vina.scripps.edu/)
+
+* [ADFR suite](https://ccsb.scripps.edu/adfr/)
+
+* [Meeko](https://github.com/forlilab/Meeko/blob/develop/LICENSE)
+
+* [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
+
 ## License
 
 * [AutoDock Vina](https://autodock-vina.readthedocs.io/en/latest/citations.html)
 
-* [ADFR software suite Non-Commercial Use](https://ccsb.scripps.edu/adfr/license/)
+* [ADFR suite Non-Commercial Use](https://ccsb.scripps.edu/adfr/license/)
 
-* [Meeko](https://github.com/forlilab/Meeko/blob/develop/LICENSE) 
+* [Meeko](https://github.com/forlilab/Meeko/blob/develop/LICENSE)
 
 * [Metaphorme/AutoDock-Vina-Docker](https://github.com/Metaphorme/AutoDock-Vina-Docker/blob/main/LICENSE)
 
