@@ -16,8 +16,8 @@ RUN /bin/bash -c " \
 
 FROM continuumio/miniconda3:latest
 
-LABEL org.opencontainers.image.authors="Metaphorme" \
-      org.opencontainers.image.description="https://github.com/Metaphorme/AutoDock-Vina-Docker"
+LABEL org.opencontainers.image.authors="Metaphorme"
+LABEL org.opencontainers.image.description="https://github.com/Metaphorme/AutoDock-Vina-Docker"
 
 COPY --from=builder /app/AutoDock-Vina /opt/AutoDock-Vina
 
