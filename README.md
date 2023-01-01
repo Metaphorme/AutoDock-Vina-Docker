@@ -1,8 +1,10 @@
 # AutoDock-Vina-Docker
 
-![Build](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build.yml/badge.svg)
+[![Build](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build.yml)
+[![UpdateChecker](https://img.shields.io/badge/Update%20Checker-latest-green?logo=TryHackMe)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/update-checker.yml)
+![License](https://img.shields.io/github/license/Metaphorme/AutoDock-Vina-Docker?logo=opensourceinitiative)
 
-Package [**AutoDock Vina**](https://github.com/ccsb-scripps/AutoDock-Vina), [ADFR suite](https://ccsb.scripps.edu/adfr/), [Meeko](https://github.com/forlilab/Meeko) into one Dockerfile.
+Package [**AutoDock Vina**](https://github.com/ccsb-scripps/AutoDock-Vina), [ADFR suite](https://ccsb.scripps.edu/adfr/), [Meeko](https://github.com/forlilab/Meeko) into one Docker image.
 
 **Notice:** Please makesure you will obey the License of [AutoDock Vina](https://autodock-vina.readthedocs.io/en/latest/citations.html), [ADFR software suite Non-Commercial Use](https://ccsb.scripps.edu/adfr/license/), [Meeko](https://github.com/forlilab/Meeko/blob/develop/LICENSE) before downloading this Docker image.
 
