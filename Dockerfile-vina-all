@@ -11,8 +11,13 @@ ARG BRANCHES
 RUN /bin/bash -c " \
     set -ex \
     && apt-get update; apt-get install -y swig curl build-essential git libboost-all-dev \
+    && conda create -n vina python=3 \
+    && source /root/.bashrc; conda activate vina \
+    && conda config --env --add channels conda-forge \
+    && conda install -c conda-forge numpy boost-cpp swig openbabel scipy \
     && git clone -b $BRANCHES https://github.com/ccsb-scripps/AutoDock-Vina /app/AutoDock-Vina \
     && cd /app/AutoDock-Vina/build/linux/release; make \
+    && cd /app/AutoDock-Vina/build/python; python setup.py build \
     "
 
 
@@ -30,15 +35,15 @@ VOLUME /data
 
 RUN /bin/bash -c " \
     set -ex \
-    && apt-get update; apt-get install -y curl vim libgomp1 \
+    && apt-get update; apt-get install -y curl vim libgomp1 build-essential \
     && conda create -n vina python=3 \
     && source /root/.bashrc; conda activate vina \
     && conda config --env --add channels conda-forge \
     && conda install -c conda-forge numpy boost-cpp swig openbabel scipy; pip --no-cache-dir install meeko rdkit pandas \
     && sed -i 's/base/vina/g' /root/.bashrc \
-    && cd /opt/AutoDock-Vina/build/python; python setup.py build install \
+    && cd /opt/AutoDock-Vina/build/python; python setup.py install \
     && cd /tmp; curl -SL https://ccsb.scripps.edu/adfr/download/1038 | tar -zx; cd ADFRsuite_x86_64Linux_1.0; ./install.sh -d /opt/adfr -c 1 -l \
-    && conda clean --all; rm -rf /tmp/* \
+    && conda clean --all; apt-get purge -y --auto-remove build-essential; rm -rf /tmp/* \
     "
 
 ENV PATH=$PATH:/opt/adfr/bin/:/opt/AutoDock-Vina/build/linux/release/:/data/
