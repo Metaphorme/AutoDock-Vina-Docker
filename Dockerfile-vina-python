@@ -21,7 +21,8 @@ FROM continuumio/miniconda3:latest
 LABEL org.opencontainers.image.authors="Metaphorme" \
       org.opencontainers.image.document="https://github.com/Metaphorme/AutoDock-Vina-Docker" \
       org.opencontainers.image.description="Build from ${BRANCHES}" \
-      org.opencontainers.image.licenses="MIT"
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.name="vina-python"
 
 COPY --from=builder /app/AutoDock-Vina /opt/AutoDock-Vina
 
@@ -29,17 +30,16 @@ VOLUME /data
 
 RUN /bin/bash -c " \
     set -ex \
-    && apt-get update; apt-get install -y curl vim libgomp1 g++ make \
+    && apt-get update; apt-get install -y curl vim libgomp1 \
     && conda create -n vina python=3 \
     && source /root/.bashrc; conda activate vina \
     && conda config --env --add channels conda-forge \
     && conda install -c conda-forge numpy boost-cpp swig openbabel scipy; pip --no-cache-dir install meeko rdkit pandas \
     && sed -i 's/base/vina/g' /root/.bashrc \
     && cd /opt/AutoDock-Vina/build/python; python setup.py build install \
-    && cd /tmp; curl -SL https://ccsb.scripps.edu/adfr/download/1038 | tar -zx; cd ADFRsuite_x86_64Linux_1.0; ./install.sh -d /opt/adfr/ -c 1 -l \
-    && conda clean --all; apt-get purge -y --auto-remove g++ make; rm -rf /tmp/* \
+    && conda clean --all; rm -rf /tmp/* \
     "
 
-ENV PATH=$PATH:/opt/adfr/bin/:/opt/AutoDock-Vina/build/linux/release/
+ENV PATH=$PATH:/opt/AutoDock-Vina/build/linux/release/:/data/
 
 WORKDIR /data

@@ -34,13 +34,36 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Build and release Docker images
+            
+      - name: Build and Release vina images
         uses: docker/build-push-action@v3
         if: ${{ github.event.client_payload.BEANCHES }} == ${{ matrix.BRANCHES }} || github.event.action == ''
         with:
           platforms: linux/amd64,linux/arm64
           build-args: |
             BRANCHES=${{ matrix.BRANCHES }}
-          tags: ghcr.io/metaphorme/autodock-vina:${{ matrix.BRANCHES }}
+          file: Dockerfile-vina
+          tags: ghcr.io/metaphorme/vina:${{ matrix.BRANCHES }}
+          push: true
+      
+      - name: Build and Release vina-all images
+        uses: docker/build-push-action@v3
+        if: ${{ github.event.client_payload.BEANCHES }} == ${{ matrix.BRANCHES }} || github.event.action == ''
+        with:
+          platforms: linux/amd64
+          build-args: |
+            BRANCHES=${{ matrix.BRANCHES }}
+          file: Dockerfile-vina-all
+          tags: ghcr.io/metaphorme/vina-all:${{ matrix.BRANCHES }}
+          push: true
+
+      - name: Build and Release vina-python images
+        uses: docker/build-push-action@v3
+        if: ${{ github.event.client_payload.BEANCHES }} == ${{ matrix.BRANCHES }} || github.event.action == ''
+        with:
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            BRANCHES=${{ matrix.BRANCHES }}
+          file: Dockerfile-vina-python
+          tags: ghcr.io/metaphorme/vina-python:${{ matrix.BRANCHES }}
           push: true
