@@ -4,7 +4,7 @@
 # Copyright (c) 2022 Metaphorme <https://github.com/Metaphorme>
 
 
-FROM ubuntu:latest as builder
+FROM continuumio/miniconda3:latest as builder
 
 ARG BRANCHES
 

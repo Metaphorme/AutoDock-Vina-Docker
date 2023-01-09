@@ -19,7 +19,7 @@ RUN /bin/bash -c " \
     && cd /app/AutoDock-Vina/build/linux/release; make \
     && cd /app/AutoDock-Vina/build/python; python setup.py build \
     "
-
+    
 
 FROM continuumio/miniconda3:latest
 

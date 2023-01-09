@@ -15,6 +15,7 @@ RUN /bin/bash -c " \
     && cd /app/AutoDock-Vina/build/linux/release; make \
     "
 
+
 FROM scratch
 
 LABEL org.opencontainers.image.authors="Metaphorme" \
