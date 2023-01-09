@@ -27,11 +27,10 @@ LABEL org.opencontainers.image.authors="Metaphorme" \
       org.opencontainers.image.name="vina"
 
 COPY --from=builder /app/AutoDock-Vina/build/linux/release/vina /
+COPY --from=builder /app/AutoDock-Vina/build/linux/release/vina_split /
 
 VOLUME /data
 
 WORKDIR /data
 
-ENV PATH=$PATH:/opt/AutoDock-Vina/build/linux/release/:/data/
-
-ENTRYPOINT ["/vina"]
+ENV PATH=$PATH:/:/data/

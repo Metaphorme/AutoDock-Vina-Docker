@@ -14,7 +14,7 @@ We provide [vina](https://github.com/users/Metaphorme/packages/container/package
 
 | Package                                                      | Included programs                                            | Arch        |
 | :----------------------------------------------------------- | ------------------------------------------------------------ | ----------- |
-| [vina](https://github.com/users/Metaphorme/packages/container/package/vina) | vina binary                                                  | amd64/arm64 |
+| [vina](https://github.com/users/Metaphorme/packages/container/package/vina) | vina binary, vice versa                                      | amd64/arm64 |
 | [vina-python](https://github.com/users/Metaphorme/packages/container/package/vina-python) | vina binary, vice versa, vina python bindings, Meeko         | amd64/arm64 |
 | [vina-all](https://github.com/users/Metaphorme/packages/container/package/vina-all) | vina binary, vice versa, vina python bindings, Meeko, ADFR Suite | amd64       |
 
@@ -60,7 +60,7 @@ docker build --build-arg BRANCHES=[release or develop] -t TAG_NAME - < Dockerfil
 
   ```bash
   docker run -v $PWD:/data --rm ghcr.io/metaphorme/vina:release \
-             --ligand 1iep_ligand.pdbqt --maps 1iep_receptor --scoring ad4 \
+        vina --ligand 1iep_ligand.pdbqt --maps 1iep_receptor --scoring ad4 \
              --exhaustiveness 32 --out 1iep_ligand_ad4_out.pdbqt
   ```
 
