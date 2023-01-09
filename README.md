@@ -59,7 +59,7 @@ docker build --build-arg BRANCHES=[release or develop] -t TAG_NAME - < Dockerfil
 * Exec commands and mount $PWD to /data
 
   ```bash
-  docker run -v $PWD:/data ghcr.io/metaphorme/vina:release \
+  docker run -v $PWD:/data --rm ghcr.io/metaphorme/vina:release \
              --ligand 1iep_ligand.pdbqt --maps 1iep_receptor --scoring ad4 \
              --exhaustiveness 32 --out 1iep_ligand_ad4_out.pdbqt
   ```
@@ -71,7 +71,7 @@ docker build --build-arg BRANCHES=[release or develop] -t TAG_NAME - < Dockerfil
 * Enter the shell and mount $PWD to /data
 
   ```bash
-  docker run -it -v $PWD:/data ghcr.io/metaphorme/vina-python:release
+  docker run -it -v $PWD:/data --rm ghcr.io/metaphorme/vina-python:release
   ```
 
   **Notice:** `$PWD` means the current working directory; `/data` is contained in $PATH.
@@ -99,7 +99,7 @@ docker build --build-arg BRANCHES=[release or develop] -t TAG_NAME - < Dockerfil
 * Enter the shell and mount $PWD to /data
 
   ```bash
-  docker run -it -v $PWD:/data ghcr.io/metaphorme/vina-all:release
+  docker run -it -v $PWD:/data --rm ghcr.io/metaphorme/vina-all:release
   ```
 
 	**Notice:** `$PWD` means the current working directory.
