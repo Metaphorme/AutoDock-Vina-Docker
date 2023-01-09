@@ -23,6 +23,8 @@ RUN /bin/bash -c " \
 
 FROM continuumio/miniconda3:latest
 
+ARG BRANCHES
+
 LABEL org.opencontainers.image.authors="Metaphorme" \
       org.opencontainers.image.document="https://github.com/Metaphorme/AutoDock-Vina-Docker" \
       org.opencontainers.image.description="Build from ${BRANCHES}" \
