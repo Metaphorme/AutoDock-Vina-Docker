@@ -1,4 +1,4 @@
-name: Build
+name: Build AutoDock Image
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - '**.md'
       - 'LICENSE'
       - '.github/*'
+      - 'Dockerfile-mgltools'
 
   workflow_dispatch:
 
@@ -66,13 +67,4 @@ jobs:
             BRANCHES=${{ matrix.BRANCHES }}
           file: Dockerfile-vina-all
           tags: ghcr.io/metaphorme/vina-all:${{ matrix.BRANCHES }}
-          push: true
-
-      - name: Build and Release mgltools images
-        uses: docker/build-push-action@v3
-        if: ${{ github.event.client_payload.BEANCHES }} == ${{ matrix.BRANCHES }} || github.event.action == ''
-        with:
-          platforms: linux/amd64
-          file: Dockerfile-mgltools
-          tags: ghcr.io/metaphorme/mgltools
           push: true
