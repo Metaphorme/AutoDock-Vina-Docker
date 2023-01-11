@@ -4,7 +4,7 @@
 [![UpdateChecker](https://img.shields.io/badge/Update%20Checker-latest-green?logo=TryHackMe)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/update-checker.yml)
 ![License](https://img.shields.io/github/license/Metaphorme/AutoDock-Vina-Docker?logo=opensourceinitiative)
 
-Package [AutoDock Vina](https://github.com/ccsb-scripps/AutoDock-Vina), [ADFR suite](https://ccsb.scripps.edu/adfr/), [Meeko](https://github.com/forlilab/Meeko) into one Docker image.
+Package [AutoDock Vina](https://github.com/ccsb-scripps/AutoDock-Vina), [ADFR suite](https://ccsb.scripps.edu/adfr/), [Meeko](https://github.com/forlilab/Meeko), [MGLTools](https://ccsb.scripps.edu/mgltools/) into Docker image.
 
 **Notice:** Please makesure you will obey the License of [AutoDock Vina](https://autodock-vina.readthedocs.io/en/latest/citations.html), [ADFR software suite Non-Commercial Use](https://ccsb.scripps.edu/adfr/license/), [Meeko](https://github.com/forlilab/Meeko/blob/develop/LICENSE) before downloading this Docker image.
 
@@ -17,8 +17,9 @@ We provide [vina](https://github.com/users/Metaphorme/packages/container/package
 | [vina](https://github.com/users/Metaphorme/packages/container/package/vina) | vina binary, vice versa                                      | amd64/arm64 |
 | [vina-python](https://github.com/users/Metaphorme/packages/container/package/vina-python) | vina binary, vice versa, vina python bindings, Meeko         | amd64/arm64 |
 | [vina-all](https://github.com/users/Metaphorme/packages/container/package/vina-all) | vina binary, vice versa, vina python bindings, Meeko, ADFR Suite | amd64       |
+| [AutoDockTools (MGLTools)](https://github.com/users/Metaphorme/packages/container/package/mgltools) | MGLTools                                                     | amd64       |
 
-Because of the lack arm64 support of **ADFR Suite**, we can't provide arm64 image with ADFR Suite.
+Because of the lack arm64 support of **ADFR Suite** and **MGLTools**, we can't provide arm64 images with ADFR Suite and MGLTools.
 
 ## Get Docker Image
 
@@ -42,6 +43,9 @@ docker pull ghcr.io/metaphorme/vina-python:develop
 docker pull ghcr.io/metaphorme/vina-all:release
 # Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/develop
 docker pull ghcr.io/metaphorme/vina-all:develop
+
+# MGLTools
+docker pull ghcr.io/metaphorme/mgltools
 ```
 
 ### Build in local
@@ -49,7 +53,10 @@ docker pull ghcr.io/metaphorme/vina-all:develop
 ```bash
 git clone https://github.com/Metaphorme/AutoDock-Vina-Docker.git
 cd AutoDock-Vina-Docker
+# To build Dockerfile-vina* image
 docker build --build-arg BRANCHES=[release or develop] -t TAG_NAME - < Dockerfile-vina-[name]
+# To build MGLTools image
+docker build -t mgltools - < Dockerfile-mgltools
 ```
 
 ## Run Docker Image
@@ -129,6 +136,33 @@ docker build --build-arg BRANCHES=[release or develop] -t TAG_NAME - < Dockerfil
   /opt/conda
   ```
 
+## MGLTools
+
+**Notice: MGLTools image is working well on macOS, it havn't been tested on other platforms. It may not be able to work directly on Linux, for more info, please [check](https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal).**
+
+* Setup [XQuartz](https://www.xquartz.org/)
+
+* Enable GLX
+
+  ```bash
+  # Run in Terminal
+  defaults write org.macosforge.xquartz.X11 enable_iglx -bool true
+  ```
+
+* Add localhost into access control list (Run every time you restart your computer)
+
+  ```bash
+  # Run in Terminal
+  xhost +localhost
+  ```
+
+* Mount $PWD to /data and Run MGLTools
+
+  ```bash
+  docker run --rm -it -v $PWD:/data -v /tmp/.X11-unix:/tmp/.X11-unix ghcr.io/metaphorme/mgltools
+  ```
+
+**Notice: If the window of AutoDockTools disappeared, open XQuartz -> Windows -> AutoDockTools to turn it up.**
 
 ## Contribute
 
@@ -141,6 +175,8 @@ Contributions welcome! Please open an issue to discuess at first, fork this repo
 * [ADFR suite](https://ccsb.scripps.edu/adfr/)
 
 * [Meeko](https://github.com/forlilab/Meeko/blob/develop/LICENSE)
+
+* [AutoDockTools (MGLTools)](https://github.com/users/Metaphorme/packages/container/package/mgltools)
 
 * [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 

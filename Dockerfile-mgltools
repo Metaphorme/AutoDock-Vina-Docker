@@ -1,0 +1,30 @@
+# AutoDock-Vina-Docker
+# https://github.com/Metaphorme/AutoDock-Vina-Docker
+# MIT License
+# Copyright (c) 2022 Metaphorme <https://github.com/Metaphorme>
+
+
+From --platform=linux/amd64 ubuntu:bionic
+
+LABEL org.opencontainers.image.authors="Metaphorme" \
+      org.opencontainers.image.document="https://github.com/Metaphorme/AutoDock-Vina-Docker" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.name="mgltools"
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+VOLUME /data
+
+RUN /bin/bash -c " \
+    set -ex \
+    && apt-get update; apt-get install -y curl tk8.5 libglu1-mesa \
+    && cd /tmp; curl -SL https://ccsb.scripps.edu/mgltools/download/491 | tar -zx; cd mgltools_x86_64Linux2_1.5.7 \
+    && ./install.sh -d /opt/mgltools -c 1 \
+    && echo -e "alias pmv='/opt/mgltools/bin/pmv'\nalias adt='/opt/mgltools/bin/adt'\nalias vision='/opt/mgltools/bin/vision'\nalias && pythonsh='/opt/mgltools/bin/pythonsh'\n" > /root/.bashrc \
+    && apt-get purge -y --auto-remove curl; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    "
+
+ENV PATH=/opt/mgltools/bin/:$PATH \
+    DISPLAY=host.docker.internal:0
+
+CMD ["adt"]
