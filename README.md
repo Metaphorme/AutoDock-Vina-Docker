@@ -1,6 +1,7 @@
 # AutoDock-Vina-Docker
 
-[![Build](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build.yml)
+[![Build AutoDock Image](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_autodock.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_autodock.yml)
+[![Build MGLTools Image](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_mgltools.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_mgltools.yml)
 [![UpdateChecker](https://img.shields.io/badge/Update%20Checker-latest-green?logo=TryHackMe)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/update-checker.yml)
 ![License](https://img.shields.io/github/license/Metaphorme/AutoDock-Vina-Docker?logo=opensourceinitiative)
 
