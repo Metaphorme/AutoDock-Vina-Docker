@@ -24,6 +24,8 @@ Because of the lack arm64 support of **ADFR Suite** and **MGLTools**, we can't p
 
 ## Get Docker Image
 
+**⚠️Warning: The `release` tag is deprecated, use a specific tag for a specific release version instead.**
+
 ### From Github
 
 ```bash
