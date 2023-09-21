@@ -2,11 +2,10 @@ name: Build AutoDock Image from Tag
 
 on:
   push:
-    paths-ignore: 
-      - '**.md'
-      - 'LICENSE'
-      - '.github/*'
-      - 'Dockerfile-mgltools'
+    paths: 
+      - 'Dockerfile-vina'
+      - 'Dockerfile-vina-all'
+      - 'Dockerfile-vina-python'
 
   workflow_dispatch:
     inputs:

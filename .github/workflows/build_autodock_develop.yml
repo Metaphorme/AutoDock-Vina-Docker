@@ -2,11 +2,11 @@ name: Build AutoDock Image on Develop Branch
 
 on:
   push:
-    paths-ignore: 
-      - '**.md'
-      - 'LICENSE'
-      - '.github/*'
-      - 'Dockerfile-mgltools'
+    paths: 
+      - 'Dockerfile-vina'
+      - 'Dockerfile-vina-all'
+      - 'Dockerfile-vina-python'
+      - '.github/workflows/build_autodock_develop'
 
   workflow_dispatch:
 
