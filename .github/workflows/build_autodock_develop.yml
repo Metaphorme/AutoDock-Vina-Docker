@@ -1,4 +1,4 @@
-name: Build AutoDock Image
+name: Build AutoDock Image on Develop Branch
 
 on:
   push:
@@ -16,9 +16,6 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     continue-on-error: true
-    strategy:
-      matrix:
-        BRANCHES: [develop, release]
 
     steps:
       - name: Checkout
@@ -39,33 +36,30 @@ jobs:
             
       - name: Build and Release vina images
         uses: docker/build-push-action@v3
-        if: ${{ github.event.client_payload.BEANCHES }} == ${{ matrix.BRANCHES }} || github.event.action == ''
         with:
           platforms: linux/amd64,linux/arm64
           build-args: |
-            BRANCHES=${{ matrix.BRANCHES }}
+            BRANCHES=develop
           file: Dockerfile-vina
-          tags: ghcr.io/metaphorme/vina:${{ matrix.BRANCHES }}
+          tags: ghcr.io/metaphorme/vina:develop
           push: true
 
       - name: Build and Release vina-python images
         uses: docker/build-push-action@v3
-        if: ${{ github.event.client_payload.BEANCHES }} == ${{ matrix.BRANCHES }} || github.event.action == ''
         with:
           platforms: linux/amd64,linux/arm64
           build-args: |
-            BRANCHES=${{ matrix.BRANCHES }}
+            BRANCHES=develop
           file: Dockerfile-vina-python
-          tags: ghcr.io/metaphorme/vina-python:${{ matrix.BRANCHES }}
+          tags: ghcr.io/metaphorme/vina-python:develop
           push: true
       
       - name: Build and Release vina-all images
         uses: docker/build-push-action@v3
-        if: ${{ github.event.client_payload.BEANCHES }} == ${{ matrix.BRANCHES }} || github.event.action == ''
         with:
           platforms: linux/amd64
           build-args: |
-            BRANCHES=${{ matrix.BRANCHES }}
+            BRANCHES=develop
           file: Dockerfile-vina-all
-          tags: ghcr.io/metaphorme/vina-all:${{ matrix.BRANCHES }}
+          tags: ghcr.io/metaphorme/vina-all:develop
           push: true

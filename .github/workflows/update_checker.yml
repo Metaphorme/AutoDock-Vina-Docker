@@ -11,9 +11,6 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        BRANCHES: [develop, release]
 
     steps:
     - name: Get Commit Hash
@@ -26,13 +23,13 @@ jobs:
       id: cacheHash
       uses: actions/cache@v3
       with:
-        path: .commitHash-${{ matrix.BRANCHES }}
-        key: ${{ matrix.BRANCHES }}-${{ steps.getHash.outputs.commitHash }}
+        path: .commitHash-develop
+        key: develop-${{ steps.getHash.outputs.commitHash }}
 
     - name: Save New Commit Hash
       if: steps.cacheHash.outputs.cache-hit != 'true'
       run: |
-        echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash-${{ matrix.BRANCHES }}
+        echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash-develop
 
     - name: Trigger build
       if: steps.cacheHash.outputs.cache-hit != 'true'
@@ -40,4 +37,3 @@ jobs:
       with:
         token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
         event-type: Source Code Update
-        client-payload: '{"BEANCHES": "${{ matrix.BRANCHES }}"}'
