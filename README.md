@@ -1,8 +1,8 @@
 # AutoDock-Vina-Docker
 
-[![Build AutoDock Image](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_autodock.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_autodock.yml)
-[![Build MGLTools Image](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_mgltools.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_mgltools.yml)
-[![UpdateChecker](https://img.shields.io/badge/Update%20Checker-latest-green?logo=TryHackMe)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/update-checker.yml)
+[![AutoDock Release](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_autodock_release.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_autodock_release.yml)
+[![AutoDock Develop](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_autodock_develop.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_autodock_develop.yml)
+[![MGLTools Image](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_mgltools.yml/badge.svg)](https://github.com/Metaphorme/AutoDock-Vina-Docker/actions/workflows/build_mgltools.yml)
 ![License](https://img.shields.io/github/license/Metaphorme/AutoDock-Vina-Docker?logo=opensourceinitiative)
 
 Package [AutoDock Vina](https://github.com/ccsb-scripps/AutoDock-Vina), [ADFR suite](https://ccsb.scripps.edu/adfr/), [Meeko](https://github.com/forlilab/Meeko), [MGLTools](https://ccsb.scripps.edu/mgltools/) into Docker image.
@@ -28,20 +28,29 @@ Because of the lack arm64 support of **ADFR Suite** and **MGLTools**, we can't p
 
 ```bash
 # vina
-# Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/release
-docker pull ghcr.io/metaphorme/vina:release
+
+# Build from certain version like "v1.2.5"
+# To check full version supported, please click https://github.com/Metaphorme/AutoDock-Vina-Docker/pkgs/container/vina
+docker pull ghcr.io/metaphorme/vina:v1.2.5
+
 # Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/develop
 docker pull ghcr.io/metaphorme/vina:develop
 
 # vina-python
-# Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/release
-docker pull ghcr.io/metaphorme/vina-python:release
+
+# Build from certain version like "v1.2.5"
+# To check full version supported, please click https://github.com/Metaphorme/AutoDock-Vina-Docker/pkgs/container/vina-python
+docker pull ghcr.io/metaphorme/vina-python:v1.2.5
+
 # Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/develop
 docker pull ghcr.io/metaphorme/vina-python:develop
 
 # vina-all
-# Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/release
-docker pull ghcr.io/metaphorme/vina-all:release
+
+# Build from certain version like "v1.2.5"
+# To check full version supported, please click https://github.com/Metaphorme/AutoDock-Vina-Docker/pkgs/container/vina-all
+docker pull ghcr.io/metaphorme/vina-all:v1.2.5
+
 # Build from https://github.com/ccsb-scripps/AutoDock-Vina/tree/develop
 docker pull ghcr.io/metaphorme/vina-all:develop
 
@@ -55,7 +64,8 @@ docker pull ghcr.io/metaphorme/mgltools
 git clone https://github.com/Metaphorme/AutoDock-Vina-Docker.git
 cd AutoDock-Vina-Docker
 # To build Dockerfile-vina* image
-docker build --build-arg BRANCHES=[release or develop] -t TAG_NAME - < Dockerfile-vina-[name]
+TAG_NAME=v1.2.5
+docker build --build-arg BRANCHES=$TAG_NAME -t $TAG_NAME - < Dockerfile-vina-[name]
 # To build MGLTools image
 docker build -t mgltools - < Dockerfile-mgltools
 ```
@@ -67,7 +77,7 @@ docker build -t mgltools - < Dockerfile-mgltools
 * Exec commands and mount $PWD to /data
 
   ```bash
-  docker run -v $PWD:/data --rm ghcr.io/metaphorme/vina:release \
+  docker run -v $PWD:/data --rm ghcr.io/metaphorme/vina:v1.2.5 \
         vina --ligand 1iep_ligand.pdbqt --maps 1iep_receptor --scoring ad4 \
              --exhaustiveness 32 --out 1iep_ligand_ad4_out.pdbqt
   ```
@@ -79,7 +89,7 @@ docker build -t mgltools - < Dockerfile-mgltools
 * Enter the shell and mount $PWD to /data
 
   ```bash
-  docker run -it -v $PWD:/data --rm ghcr.io/metaphorme/vina-python:release
+  docker run -it -v $PWD:/data --rm ghcr.io/metaphorme/vina-python:v1.2.5
   ```
 
   **Notice:** `$PWD` means the current working directory; `/data` is contained in $PATH.
@@ -107,7 +117,7 @@ docker build -t mgltools - < Dockerfile-mgltools
 * Enter the shell and mount $PWD to /data
 
   ```bash
-  docker run -it -v $PWD:/data --rm ghcr.io/metaphorme/vina-all:release
+  docker run -it -v $PWD:/data --rm ghcr.io/metaphorme/vina-all:v1.2.5
   ```
 
 	**Notice:** `$PWD` means the current working directory.
