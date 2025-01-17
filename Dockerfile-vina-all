@@ -11,7 +11,7 @@ ARG BRANCHES
 RUN /bin/bash -c " \
     set -ex \
     && apt-get update; apt-get install -y swig curl build-essential git libboost-all-dev \
-    && conda create -n vina python=3 \
+    && conda create -n vina python=3.12 \
     && source /root/.bashrc; conda activate vina \
     && conda config --env --add channels conda-forge \
     && conda install -c conda-forge numpy boost-cpp swig openbabel scipy \
@@ -38,7 +38,7 @@ VOLUME /data
 RUN /bin/bash -c " \
     set -ex \
     && apt-get update; apt-get install -y curl vim libgomp1 build-essential \
-    && conda create -n vina python=3 \
+    && conda create -n vina python=3.12 \
     && source /root/.bashrc; conda activate vina \
     && conda config --env --add channels conda-forge \
     && conda install -c conda-forge numpy boost-cpp swig openbabel scipy; pip --no-cache-dir install meeko rdkit pandas \
